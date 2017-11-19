@@ -9,7 +9,7 @@ routes.post('/', (req, res) => {
 
   item.expires = new Date(req.body.date);
 
-  r.db("test").table("list").insert({name: "water 2", price: 10, size: 15, expire: r.now()}).then(result => {
+  r.db("test").table("list").insert(item).then(result => {
     console.log(result);
     if (result.inserted === 1) {
       res.send({id: result.generated_keys[0]});
