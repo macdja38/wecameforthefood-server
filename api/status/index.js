@@ -9,10 +9,12 @@ routes.get('/', (req, res) => {
       let start = Date.parse(item.added);
       let end = Date.parse(item.expire);
 
-      let time = start - end;
+      let time = end - start;
       let costPerms = item.price / time;
       return total + costPerms;
     }, 0);
+
+    console.log(costPerMSTotal);
 
     let monthCost = costPerMSTotal * 1000 * 60 * 60 * 24 * 28;
     let yearCost = costPerMSTotal * 1000 * 60 * 60 * 24 * 365;
