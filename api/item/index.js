@@ -52,13 +52,12 @@ routes.delete('/', (req, res) => {
   console.log("Got a delete request");
   console.log(req.body);
 
-  res.send("success");
   r.db("test").table("list").get(req.body.id).delete().then(result => {
     console.log(result);
     if (result.deleted === 1) {
-      res.send(result);
+      res.send("success");
     } else {
-      res.sendStatus(519);
+      res.status(400).send("Item does not or no longer exist");
     }
   });
 });
