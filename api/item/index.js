@@ -6,13 +6,14 @@ routes.post('/', (req, res) => {
   console.log("Got a request");
   console.log(req.body);
 
-  const originalItem = req.body.expire;
+  const originalItem = req.body;
 
   const item = {};
 
   try {
     item.expire = r.epochTime(chrono.parseDate(`in ${originalItem.expire}`, Date.now()).getTime() / 1000)
   } catch (error) {
+    console.error(error);
     res.status(400).send("Invalid expire format, try \"1 day\"");
     return;
   }
