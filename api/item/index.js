@@ -8,7 +8,7 @@ routes.post('/', (req, res) => {
 
   const item = Object.assign({}, req.body);
 
-  item.expires = r.epochTime(chrono.parseDate(`in ${req.body.date}`, Date.now()).getTime() / 1000);
+  item.expire = r.epochTime(chrono.parseDate(`in ${req.body.expire}`, Date.now()).getTime() / 1000);
 
   r.db("test").table("list").insert(item).then(result => {
     console.log(result);
