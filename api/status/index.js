@@ -4,7 +4,20 @@ const r = require("../../db");
 
 routes.get('/', (req, res) => {
   r.db("test").table("list").run().then((list) => {
-    res.send(list);
+
+    let costPerMSTotal = list.reduce((total, item) => {
+      let start = Date.parse(item.added);
+      let end = Date.parse(item.expire);
+
+      let time = start - end;
+      let costPerms = item.price / time;
+      return total + costPerms;
+    }, 0);
+
+    let monthCost = costPerMSTotal * 1000 * 60 * 60 * 24 * 28;
+    let yearCost = costPerMSTotal * 1000 * 60 * 60 * 24 * 365;
+
+    res.send({month: monthCost, year: yearCost});
   });
 });
 
