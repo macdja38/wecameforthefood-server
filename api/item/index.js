@@ -36,11 +36,11 @@ routes.post('/', (req, res) => {
     return;
   }
 
-  // r.db("test").table("list").sum("size").add(5).gt(80000).branch(false, r.db("test").table("list").insert(r.db("test").table("list").get("73b21891-cd97-4e83-b1c2-8f9b10904020").without("id")));
-
-  r.db("test").table("list").insert(item).then(result => {
+  r.db("test").table("list").sum("size").add(5).gt(80000).branch(false, r.db("test").table("list").insert(item)).then(result => {
     console.log(result);
-    if (result.inserted === 1) {
+    if (result === false) {
+      res.status(400).send("Item does not fit in storage");
+    } else if (result.inserted === 1) {
       res.send({id: result.generated_keys[0]});
     } else {
       res.sendStatus(519);
