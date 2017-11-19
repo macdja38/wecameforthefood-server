@@ -19,14 +19,14 @@ routes.post('/', (req, res) => {
   }
 
   item.size = parseInt(originalItem.size, 10);
-  if (isNaN(item.size) || item.size === 0) {
-    res.status(400).send("Invalid size, please send a valid non-zero number, eg: 10");
+  if (isNaN(item.size) || item.size <= 0) {
+    res.status(400).send("Invalid size, please send a valid positive number, eg: 10");
     return;
   }
 
   item.price = parseInt(originalItem.price, 10);
-  if (isNaN(item.price) || item.price === 0) {
-    res.status(400).send("Invalid price, please send a valid non-zero number, eg: 5");
+  if (isNaN(item.price) || item.price <= 0) {
+    res.status(400).send("Invalid price, please send a valid positive number, eg: 5");
     return;
   }
 
