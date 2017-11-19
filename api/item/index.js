@@ -1,5 +1,6 @@
 const routes = require('express').Router();
 const r = require("../../db");
+const chrono = require("chrono-node");
 
 routes.post('/', (req, res) => {
   console.log("Got a request");
@@ -7,7 +8,7 @@ routes.post('/', (req, res) => {
 
   const item = Object.assign({}, req.body);
 
-  item.expires = new Date(req.body.date);
+  item.expires = r.epochTime(chrono.parseDate(`in ${req.body.date}`, Date.now()).getTime() / 1000);
 
   r.db("test").table("list").insert(item).then(result => {
     console.log(result);
