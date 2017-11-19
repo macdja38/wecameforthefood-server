@@ -39,7 +39,7 @@ routes.post('/', (req, res) => {
     return;
   }
 
-  r.db("test").table("list").sum("size").add(5).gt(80000).branch(false, r.db("test").table("list").insert(item)).then(result => {
+  r.db("test").table("list").sum("size").add(item.size).gt(80000).branch(false, r.db("test").table("list").insert(item)).then(result => {
     console.log(result);
     if (result === false) {
       res.status(400).send("Item does not fit in storage");
