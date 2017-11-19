@@ -30,6 +30,9 @@ routes.post('/', (req, res) => {
     return;
   }
 
+  // tax
+  item.price = item.price * 1.23;
+
   item.name = originalItem.name;
   if (typeof item.name !== "string" || item.name === "") {
     res.status(400).send("Invalid name, please send a string with content, eg bagel");
