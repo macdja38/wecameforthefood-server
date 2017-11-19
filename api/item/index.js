@@ -49,7 +49,7 @@ routes.post('/', (req, res) => {
 });
 
 routes.delete('/', (req, res) => {
-  console.log("Got a request");
+  console.log("Got a delete request");
   console.log(req.body);
 
   res.send("success");
