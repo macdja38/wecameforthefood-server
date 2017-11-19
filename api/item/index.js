@@ -10,6 +10,8 @@ routes.post('/', (req, res) => {
 
   const item = {};
 
+  item.added = r.now();
+
   try {
     item.expire = r.epochTime(chrono.parseDate(`in ${originalItem.expire}`, Date.now()).getTime() / 1000)
   } catch (error) {
