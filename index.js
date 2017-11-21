@@ -20,5 +20,5 @@ app.use("/api", api);
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
 setInterval(() => {
-  r.db("test").table("list").filter(i => i("expire").le(r.now())).delete().run();
+  r.table("list").filter(i => i("expire").le(r.now())).delete().run();
 }, 5000);

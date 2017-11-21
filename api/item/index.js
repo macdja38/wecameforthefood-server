@@ -41,7 +41,7 @@ routes.post('/', (req, res) => {
     return;
   }
 
-  r.db("test").table("list").sum("size").add(item.size).gt(80000).branch(false, r.db("test").table("list").insert(item)).then(result => {
+  r.table("list").sum("size").add(item.size).gt(80000).branch(false, r.table("list").insert(item)).then(result => {
     console.log(result);
     if (result === false) {
       res.status(400).send("Item does not fit in storage");
@@ -57,7 +57,7 @@ routes.delete('/', (req, res) => {
   console.log("Got a delete request");
   console.log(req.body);
 
-  r.db("test").table("list").get(req.body.id).delete().then(result => {
+  r.table("list").get(req.body.id).delete().then(result => {
     console.log(result);
     if (result.deleted === 1) {
       res.send("success");
